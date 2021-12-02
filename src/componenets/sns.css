@@ -1,0 +1,9 @@
+#main-container{
+    display: flex;
+}
+#nav{
+    flex-basis: 20%;
+}
+#appview{
+    margin-left: 1rem;
+}
