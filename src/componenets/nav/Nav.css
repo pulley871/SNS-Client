@@ -1,3 +1,9 @@
 #color{
     background: rgb(78, 78, 221)!important
   }
+  #nav-contact-add{
+    font-size: .8rem;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: .5rem;
+  }

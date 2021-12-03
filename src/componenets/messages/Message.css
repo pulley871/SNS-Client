@@ -63,4 +63,15 @@ h1{
 .tag-container{
     margin-top: -2rem;
     margin-bottom: 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    
 }
+@media screen and (max-width: 992px) {
+    #message-container{
+        margin-left: -5rem;
+        width: 29rem;
+        height: 55rem;
+        
+    }
+  }

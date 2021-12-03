@@ -1,0 +1,10 @@
+#add-contact-button{
+    margin-top: 2rem;
+    font-size: 1.0rem;
+    width: 10rem;
+}
+#delete-contact-button{
+    margin-top: 2rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+}

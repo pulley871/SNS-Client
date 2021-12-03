@@ -7,3 +7,11 @@
 #appview{
     margin-left: 1rem;
 }
+
+
+@media screen and (max-width: 1166px) {
+    #appview{
+        flex-direction: column;
+        margin-left: 13.5rem;
+    }
+  }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { DeleteMessage, getContactAndMessages } from "./MessageProvider"
 import "./Message.css"
 import { Modal, Paper, Button, Typography } from "@mui/material"
@@ -22,6 +22,7 @@ export const ContactMessage = () =>{
         boxShadow: 24,
     
       };
+    const history = useHistory()
     const render = () =>{
         getContactAndMessages(contactId).then((data)=>setContact(data))
     }
@@ -55,7 +56,7 @@ export const ContactMessage = () =>{
                 </div>
             </Box>
         </Modal>
-        <h1> {contact?.name}</h1>
+        <h1> {contact?.name}<a onClick={()=>history.push(`/edit/contact/${contact.id}`)}><span class="material-icons">edit</span></a></h1>
         <div id="message-container" key="message-container">
             {contact.messages?.length > 0 ?
             contact.messages?.map((message)=>{
@@ -77,7 +78,9 @@ export const ContactMessage = () =>{
                                 
 
                                 <div key={`message-${message.id}-buttons`}>
-                                <a><span class="material-icons">edit</span></a>
+                                <a onClick={()=>{
+                                    history.push(`/editmessage/${contact.id}/${message.id}`)
+                                }}><span class="material-icons">edit</span></a>
                                 <a onClick={()=>{
                                     handleModal()
                                     setDeleteId(message.id)    
@@ -89,6 +92,6 @@ export const ContactMessage = () =>{
                 )
             }): "You have no saved messages yet"}
         </div>
-        <Button variant="contained"id="create-button">Create Message</Button>
+        <Button variant="contained"id="create-button" onClick={()=> history.push(`/new/message/${contact.id}`)}>Create Message</Button>
     </>)
 }

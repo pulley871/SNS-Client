@@ -1,0 +1,47 @@
+#add-message-container{
+    display: flex;
+    
+}
+#add-message-form{
+    flex-basis: 60%;
+    width: 50rem;
+    margin-top: 2rem;
+}
+#tags-add-message-container{
+    flex-basis: 40%;
+    margin-left: 2rem;
+    margin-top: 10rem;
+}
+#tags-add-message-container p{
+    margin-left: .3rem;
+    
+}
+#cat-list{
+    width: 20rem;
+}
+#outlined-textarea{
+    width: 30rem;
+}
+#add-message-button{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+#add-message-date{
+    font-size: 1.5rem;
+}
+label{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-right: .5rem;
+}
+
+@media screen and (max-width: 1166px) {
+    #add-message-container{
+        flex-direction: column;
+    }
+    #tags-add-message-container{
+        margin-left: 0rem;
+        margin-top: 2rem;
+        width: 30rem;
+    }
+  }

@@ -7,27 +7,27 @@ import "./Nav.css"
 import { useHistory } from 'react-router';
 import { NavContext } from '../NavProvider';
 export const NavBar = () => {
-    const [contacts, setContacts] = useState({})
+    const {contacts, render} = useContext(NavContext)
     const [selected, setSelected] = useState(0)
     const history = useHistory()
     const {isOpen, open} = useContext(NavContext)
-    const render = () =>{
-        return fetch('http://localhost:8000/contacts',
-            {
-                headers: {
-                    "Authorization": `Token ${localStorage.getItem("sns_token")}`
-                }
-            }
-        ).then((res)=> res.json()).then((data)=> setContacts(data))
-    }
+    
     useEffect(()=>{
         render()
     },[])
     return (<>
          <SideNav id="color"
     onSelect={(selected) => {
-        setSelected(selected)
-        history.push(`/contacts/${selected}`)
+        if(selected === "contactAdd"){
+            history.push("/new/contact")
+        }else if (selected === "home"){
+            history.push("/")
+        }
+        else{
+            setSelected(selected)
+            history.push(`/contacts/${selected}`)
+        }
+        
     }} onToggle={()=>isOpen(!open)}
 >
     <SideNav.Toggle />
@@ -51,13 +51,18 @@ export const NavBar = () => {
         <NavText>
             Contacts
         </NavText>
-                {contacts.length > 0 ?contacts?.map((contact)=> 
+                {contacts?.length > 0 ?contacts?.map((contact)=> 
                 <NavItem key={`contact-${contact.id}-navitem`}eventKey={`${contact.id}`}>
                     <NavText key={`contact-${contact.id}-navtext`}>
                         {contact?.name}
                     </NavText>
                 </NavItem>
                 ):""}
+                <NavItem eventKey="contactAdd">
+                    <NavText>
+                        New Contact<span id="nav-contact-add"class="material-icons">add</span>
+                    </NavText>
+                </NavItem>
         </NavItem> 
         
     </SideNav.Nav>

@@ -1,7 +1,11 @@
 import { Button } from "@mui/material"
 import { useContext } from "react"
 import { Route } from "react-router"
+import { AddContactPage } from "./contact/AddContact"
+import { EditContactPage } from "./contact/EditContact"
+import { AddMessagePage } from "./messages/AddMessage"
 import { ContactMessage } from "./messages/ContactMessage"
+import { EditMessagePage } from "./messages/EditMessage"
 import { NavContext, NavProvider } from "./NavProvider"
 
 export const ApplicationView = () => {
@@ -16,6 +20,17 @@ export const ApplicationView = () => {
         <Route exact path ="/contacts/:contactId">
             <ContactMessage />
         </Route>
-    
+        <Route exact path="/edit/contact/:contactId">
+            <EditContactPage />
+        </Route>
+        <Route exact path ="/new/contact">
+            <AddContactPage />
+        </Route>
+        <Route exact path ="/new/message/:contactId">
+            <AddMessagePage />
+        </Route>
+        <Route exact path = "/editmessage/:contactId/:messageId">
+            <EditMessagePage />
+        </Route>
     </div>)
 }
