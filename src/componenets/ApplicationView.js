@@ -7,6 +7,7 @@ import { AddMessagePage } from "./messages/AddMessage"
 import { ContactMessage } from "./messages/ContactMessage"
 import { EditMessagePage } from "./messages/EditMessage"
 import { NavContext, NavProvider } from "./NavProvider"
+import { HomePage } from "./user/Home"
 
 export const ApplicationView = () => {
     const {open} = useContext(NavContext)
@@ -16,7 +17,9 @@ export const ApplicationView = () => {
     };
     
     return(<div style={contentStyle}>
-    
+        <Route exact path="/">
+            <HomePage />
+        </Route>
         <Route exact path ="/contacts/:contactId">
             <ContactMessage />
         </Route>

@@ -63,8 +63,15 @@ export const NavBar = () => {
                         New Contact<span id="nav-contact-add"class="material-icons">add</span>
                     </NavText>
                 </NavItem>
-        </NavItem> 
-        
+        </NavItem>
+        <a onClick={()=>{
+            localStorage.clear()
+            history.push("/login")
+        }}>
+        <NavItem className="logout" eventKey="logout">
+            <NavText>Logout</NavText>
+        </NavItem>
+        </a>
     </SideNav.Nav>
 </SideNav>
     </>)

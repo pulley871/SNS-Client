@@ -1,6 +1,7 @@
 #add-message-container{
     display: flex;
-    
+    margin-top: 5rem;
+    margin-left: 0rem;
 }
 #add-message-form{
     flex-basis: 60%;
@@ -10,11 +11,18 @@
 #tags-add-message-container{
     flex-basis: 40%;
     margin-left: 2rem;
-    margin-top: 10rem;
+    margin-top: 0rem;
 }
 #tags-add-message-container p{
     margin-left: .3rem;
     
+}
+#review-container{
+    width: 30rem;
+    
+}
+#review-paper{
+    height:10rem;
 }
 #cat-list{
     width: 20rem;
@@ -34,7 +42,10 @@ label{
     font-weight: bolder;
     margin-right: .5rem;
 }
-
+#cat-list-step{
+    display: flex;
+    flex-direction: row;
+}
 @media screen and (max-width: 1166px) {
     #add-message-container{
         flex-direction: column;
@@ -43,5 +54,9 @@ label{
         margin-left: 0rem;
         margin-top: 2rem;
         width: 30rem;
+    }
+    #cat-list-step{
+        display: flex;
+        flex-direction: column;
     }
   }

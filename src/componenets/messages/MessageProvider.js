@@ -1,16 +1,17 @@
 export const getContactAndMessages = (id) =>{
-    return fetch(`http://localhost:8000/contacts/${id}`,
+    return fetch(`https://sns-server-capstone.herokuapp.com/contacts/${id}`,
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`
-                }
+                },
+                
             }
         ).then((res)=> res.json())
     
 }
 
 export const DeleteMessage = (id) =>{
-    return fetch(`http://localhost:8000/messages/${id}`,
+    return fetch(`https://sns-server-capstone.herokuapp.com/messages/${id}`,
             {   
                 method: "DELETE",
                 headers: {
@@ -22,7 +23,7 @@ export const DeleteMessage = (id) =>{
 }
 
 export const AddMessage = (message) => {
-    return fetch(`http://localhost:8000/messages`,
+    return fetch(`https://sns-server-capstone.herokuapp.com/messages`,
             {   
                 method: "POST",
                 headers: {
@@ -34,7 +35,7 @@ export const AddMessage = (message) => {
         )
 }
 export const EditMessage = (message, id) => {
-    return fetch(`http://localhost:8000/messages/${id}`,
+    return fetch(`https://sns-server-capstone.herokuapp.com/messages/${id}`,
             {   
                 method: "PUT",
                 headers: {
@@ -47,7 +48,7 @@ export const EditMessage = (message, id) => {
 }
 
 export const getTags = () =>{
-    return fetch(`http://localhost:8000/tags`,
+    return fetch(`https://sns-server-capstone.herokuapp.com/tags`,
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`,

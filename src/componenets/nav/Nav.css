@@ -7,3 +7,13 @@
     margin-right: 0;
     margin-left: .5rem;
   }
+.logout{
+  position: absolute !important;
+  bottom: 1rem !important;
+  width: 100%;
+  color: aliceblue;
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}

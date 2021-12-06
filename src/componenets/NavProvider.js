@@ -8,7 +8,7 @@ export const NavProvider = (props) =>{
         
     }
     const render = () =>{
-        return fetch('http://localhost:8000/contacts',
+        return fetch('https://sns-server-capstone.herokuapp.com/contacts',
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`
