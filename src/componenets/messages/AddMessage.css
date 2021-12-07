@@ -46,6 +46,8 @@ label{
     display: flex;
     flex-direction: row;
 }
+
+
 @media screen and (max-width: 1166px) {
     #add-message-container{
         flex-direction: column;
