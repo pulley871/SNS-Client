@@ -9,6 +9,7 @@ export const HomePage = () => {
         FetchHomeData().then((data)=> setHomeData(data))
     },[])
     const dotChecker = (num) =>{
+        
         const maxLength = homeData?.length
         if (num === maxLength){
             setSlideNumber(1)
@@ -18,7 +19,7 @@ export const HomePage = () => {
         }
     }
     return (<>
-            <div class="section-break"> </div>
+            <div class="home-container"> 
             <div class="column-quote">
             {homeData.length > 0?
             homeData?.map((message)=>{
@@ -35,9 +36,10 @@ export const HomePage = () => {
             </div>
             <div class="dot-container">
                 {homeData.length > 0 ? homeData.map((item)=>{
-                    return(<span class= {slideNumber === homeData.indexOf(item)+1 ? "dot active":"dot"}></span> )
+                    return(<span class= {slideNumber === homeData.indexOf(item)+1 ? "dot active":"dot"}onClick={()=>dotChecker(slideNumber)}></span> )
                 }):""}
             
+            </div>
             </div>
     
     </>)

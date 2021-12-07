@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
-import { DeleteMessage, getContactAndMessages } from "./MessageProvider"
+import { DeleteMessage, filterByDate, filterBySearchTerm, filterByTag, getContactAndMessages, getTags } from "./MessageProvider"
 import "./Message.css"
-import { Modal, Paper, Button, Typography } from "@mui/material"
+import { Modal, Paper, Button, Typography, FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material"
 import { Box } from "@mui/system"
 
 
 export const ContactMessage = () =>{
     const {contactId} = useParams()
     const [contact, setContact] = useState({})
+    const [messages, setMessages] = useState([])
     const [modal, setModalState] = useState(false)
     const [deleteId, setDeleteId] = useState(0)
+    const [tags, setTags] = useState([])
+    const [selectedTag, setSelectedTag] = useState({})
+    const [searchTerm, setSearchTerm] = useState("")
+    const [date, setDate] = useState("")
     const style = {
         position: 'absolute',
         top: '50%',
@@ -24,15 +29,35 @@ export const ContactMessage = () =>{
       };
     const history = useHistory()
     const render = () =>{
-        getContactAndMessages(contactId).then((data)=>setContact(data))
+        getContactAndMessages(contactId).then((data)=>{
+            setContact(data)
+            setMessages(data.messages)
+        })
+        getTags().then((data)=> setTags(data))
     }
     const handleModal = () =>{
         setModalState(!modal)
     }
+    const tagFilter = (event) =>{
+        setSelectedTag({"tagId": event.target.value.id, "label": event.target.value.label, "contact_id": contactId})
+
+    }
     useEffect(()=>{
        render()
     },[contactId])
-    
+    useEffect(() =>{
+        
+        if (selectedTag.contact_id !== undefined){
+
+            filterByTag(selectedTag).then((data)=>setMessages(data))
+        }else if (searchTerm !== ""){
+            filterBySearchTerm(searchTerm, contactId).then((data)=> setMessages(data))
+        }else if (date !== ""){
+            filterByDate(date, contactId).then((data)=>setMessages(data))
+        }else{
+            setMessages(contact.messages)
+        }
+    },[selectedTag, searchTerm, date])
 
     return(<>
         <Modal open={modal}
@@ -57,9 +82,47 @@ export const ContactMessage = () =>{
             </Box>
         </Modal>
         <h1> {contact?.name}<a onClick={()=>history.push(`/edit/contact/${contact.id}`)}><span class="material-icons">edit</span></a></h1>
+        <FormControl id="tag-select">
+            <InputLabel id="demo-simple-select-label">Filter By Tag</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedTag.label}
+                label="Filter By Tag"
+                onChange={tagFilter}
+            >
+                {tags?.map((tag)=> <MenuItem value={tag}>{tag.label}</MenuItem>)}
+            </Select>
+        </FormControl>
+        <FormControl id = "search-term-box">
+        <TextField
+            
+            value={searchTerm}
+            label="Search By Message Text"
+            onChange={(event)=> setSearchTerm(event.target.value)}
+            />
+        </FormControl>
+        <FormControl id="filter-date">
+        
+                
+                <TextField 
+                    type="date"
+                    labelId="date-select-filter-label"
+                    label= "Filter By Date"
+                    InputLabelProps = {{shrink:true}}
+                    value={date}
+                    onChange={(event)=> setDate(event.target.value)}    
+                />
+        </FormControl>
+        <a id="filter-reset"
+            onClick={()=>{
+                setDate("")
+                setSearchTerm("")
+                setSelectedTag({}) 
+                render()}}><span class="material-icons">restart_alt</span></a>
         <div id="message-container" key="message-container">
-            {contact.messages?.length > 0 ?
-            contact.messages?.map((message)=>{
+            {messages?.length > 0 ?
+            messages?.map((message)=>{
                 return (
                         <div key={`message-${message.id}-container`}className="message-box">
                             <Paper elevation={5}>
@@ -93,5 +156,6 @@ export const ContactMessage = () =>{
             }): "You have no saved messages yet"}
         </div>
         <Button variant="contained"id="create-button" onClick={()=> history.push(`/new/message/${contact.id}`)}>Create Message</Button>
+        
     </>)
 }

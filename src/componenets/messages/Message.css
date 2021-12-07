@@ -4,7 +4,7 @@
     border-radius: 18px;
     padding: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 35rem;
     height: 50rem;
     
@@ -12,6 +12,23 @@
     
     
 
+}
+#filter-date{
+    width:32%;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    margin-left: .25rem;
+}
+#search-term-box{
+    width:40%;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    margin-left: .25rem;
+}
+#tag-select{
+    width:25%;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
 }
 #message-container::-webkit-scrollbar{
     display: none;
