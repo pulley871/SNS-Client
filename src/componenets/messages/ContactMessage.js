@@ -74,8 +74,8 @@ export const ContactMessage = () =>{
                 <div className="modal-buttons">
                     <Button variant="contained" onClick={()=>{
                         DeleteMessage(deleteId)
-                        .then(render())
-                        handleModal()
+                        .then(()=>render())
+                        .then(()=>handleModal())
                     }} color="error">Delete</Button>
                     <Button variant="contained" onClick={handleModal} color="success">Cancel</Button>
                 </div>
