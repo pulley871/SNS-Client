@@ -6,11 +6,10 @@ import { Modal, Paper, Button, Typography, FormControl, InputLabel, Select, Menu
 import { Box } from "@mui/system"
 import { NavContext } from "../NavProvider"
 
-const socket = new WebSocket("ws://sns-server-capstone.herokuapp.com//ws/counter/")
-let count = 0
-let trigger = false
+const socket = new WebSocket("wss://sns-server-capstone.herokuapp.com//ws/counter/")
+
 export const ContactMessage = () =>{
-    const [backEndTrigger, setTrigger] = useState(0)
+    
     const {contactId} = useParams()
     const [contact, setContact] = useState({})
     const [messages, setMessages] = useState([])
