@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { DeleteMessage, filterByDate, filterBySearchTerm, filterByTag, getContactAndMessages, getTags } from "./MessageProvider"
 import "./Message.css"
 import { Modal, Paper, Button, Typography, FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material"
 import { Box } from "@mui/system"
+import { NavContext } from "../NavProvider"
 
-
+const socket = new WebSocket("ws://localhost:8000/ws/counter/")
+let count = 0
+let trigger = false
 export const ContactMessage = () =>{
+    const [backEndTrigger, setTrigger] = useState(0)
     const {contactId} = useParams()
     const [contact, setContact] = useState({})
     const [messages, setMessages] = useState([])
@@ -27,6 +31,21 @@ export const ContactMessage = () =>{
         boxShadow: 24,
     
       };
+      
+        
+      socket.onmessage = function(e) {
+          
+      const data = JSON.parse(e.data)
+      
+      if (data.Message === "Update"){
+            
+              
+              
+              render()
+
+         
+      }
+}
     const history = useHistory()
     const render = () =>{
         getContactAndMessages(contactId).then((data)=>{
@@ -42,9 +61,11 @@ export const ContactMessage = () =>{
         setSelectedTag({"tagId": event.target.value.id, "label": event.target.value.label, "contact_id": contactId})
 
     }
+    
     useEffect(()=>{
        render()
     },[contactId])
+    
     useEffect(() =>{
         
         if (selectedTag.contact_id !== undefined){
@@ -82,6 +103,7 @@ export const ContactMessage = () =>{
             </Box>
         </Modal>
         <h1> {contact?.name}<a onClick={()=>history.push(`/edit/contact/${contact.id}`)}><span class="material-icons">edit</span></a></h1>
+        <div id="filter-container">
         <FormControl id="tag-select">
             <InputLabel id="demo-simple-select-label">Filter By Tag</InputLabel>
             <Select
@@ -120,6 +142,7 @@ export const ContactMessage = () =>{
                 setSearchTerm("")
                 setSelectedTag({}) 
                 render()}}><span class="material-icons">restart_alt</span></a>
+        </div>
         <div id="message-container" key="message-container">
             {messages?.length > 0 ?
             messages?.map((message)=>{

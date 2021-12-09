@@ -13,6 +13,7 @@
     
 
 }
+
 #filter-date{
     width:32%;
     margin-bottom: .5rem;
@@ -90,5 +91,8 @@ h1{
         width: 29rem;
         height: 55rem;
         
+    }
+    #filter-container{
+        margin-left: -5rem;
     }
   }

@@ -59,6 +59,39 @@
   
   /* Add an italic font style to all quotes */
   q {font-style: italic;}
+  @media screen and (max-width: 1700px) {
+
+    .column-quote{
+      
+        width: 80%;
+        height: 475px;
+        padding: 40px;
+        padding-left:50px;
+        margin-left: 1rem;
+        padding-right: 70px;
+        padding-bottom:100px;
+        margin-right: 1em;
+        margin-bottom: 1rem;
+        border-top: 20px solid rgb(78, 78, 221);
+        border-bottom: 20px solid rgb(78, 78, 221);;
+        
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      
+    }
+    .mySlidesActive{
+      display:block;
+      padding: 80px;
+      text-align: center;
+      
+    }
+    .quote {
+      font-size:60px;
+      font-weight:bold;
+      line-height: 1;
+      text-align: center;
+    }
+  }
   @media screen and (max-width: 1166px) {
 
     .column-quote{
@@ -78,4 +111,33 @@
         white-space: nowrap;
       
     }
+    .mySlidesActive{
+      display:block;
+      padding: 40px;
+      text-align: center;
+      text-overflow: ellipsis;
+      width: 80%;
+      margin-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      
+    }
+    .quote {
+      font-size:40px;
+      font-weight:bold;
+      line-height: 1;
+      text-align: center;
+      max-width: 80%;
+      block-size: fit-content;
+      overflow-wrap: break-word;
+      
+    }
+    .dot-container {
+      text-align: center;
+      padding: 20px;
+      background: #ddd;
+      margin-left: -2rem;
+      min-width: 100%;
+      
+  }
   }

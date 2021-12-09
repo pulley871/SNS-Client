@@ -4,11 +4,13 @@ export const NavContext = createContext()
 export const NavProvider = (props) =>{
     const [open, isOpen] = useState(false)
     const [contacts, setContacts] = useState({})
-    const setOpenState = (open)=>{
+    const [backEndTrigger, setTrigger] = useState(true)
+    const test = ()=>{
         
+        setTrigger(!backEndTrigger)
     }
     const render = () =>{
-        return fetch('https://sns-server-capstone.herokuapp.com/contacts',
+        return fetch(' https://sns-server-capstone.herokuapp.com/contacts',
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`
@@ -17,6 +19,6 @@ export const NavProvider = (props) =>{
         ).then((res)=> res.json()).then((data)=> setContacts(data))
     }
     return(<NavContext.Provider value={{
-        open, isOpen, contacts, render
+        open, isOpen, contacts, render, setTrigger, backEndTrigger, test
     }}>{props.children}</NavContext.Provider>)
 }

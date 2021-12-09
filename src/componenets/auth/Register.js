@@ -31,7 +31,7 @@ export const Register = () => {
                 "phone_number": phoneNumber
             }
 
-            return fetch("https://sns-server-capstone.herokuapp.com/register", {
+            return fetch(" https://sns-server-capstone.herokuapp.com/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

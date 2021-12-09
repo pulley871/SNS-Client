@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import { SNS } from './componenets/SNS';
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

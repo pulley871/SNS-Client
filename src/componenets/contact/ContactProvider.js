@@ -1,5 +1,5 @@
 export const AddContact = (contact) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/contacts`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/contacts`,
             {   
                 method: "POST",
                 headers: {
@@ -11,7 +11,7 @@ export const AddContact = (contact) => {
         )
 }
 export const GetContact = (contactId) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/contacts/${contactId}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/contacts/${contactId}`,
             {   
                 
                 headers: {
@@ -22,7 +22,7 @@ export const GetContact = (contactId) => {
         ).then((res)=>res.json())
 }
 export const EditContact = (contact, id) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/contacts/${id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/contacts/${id}`,
             {   
                 method: "PUT",
                 headers: {
@@ -34,7 +34,7 @@ export const EditContact = (contact, id) => {
         )
 }
 export const DeleteContact = ( id) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/contacts/${id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/contacts/${id}`,
             {   
                 method: "DELETE",
                 headers: {

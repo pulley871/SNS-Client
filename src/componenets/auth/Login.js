@@ -12,7 +12,7 @@ export const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch("https://sns-server-capstone.herokuapp.com/login", {
+        return fetch(" https://sns-server-capstone.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

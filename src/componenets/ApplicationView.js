@@ -9,12 +9,14 @@ import { EditMessagePage } from "./messages/EditMessage"
 import { NavContext, NavProvider } from "./NavProvider"
 import { HomePage } from "./user/Home"
 
+let count = 0
 export const ApplicationView = () => {
-    const {open} = useContext(NavContext)
+    const {open, setTrigger, backEndTrigger, test} = useContext(NavContext)
     const contentStyle = {
         marginLeft: open ? "2rem" : "-9rem", // arbitrary values
         transition: "margin 0.2s ease"
     };
+    
     
     return(<div style={contentStyle}>
         <Route exact path="/">

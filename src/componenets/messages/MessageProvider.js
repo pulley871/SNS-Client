@@ -1,5 +1,5 @@
 export const getContactAndMessages = (id) =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/contacts/${id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/contacts/${id}`,
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`
@@ -11,7 +11,7 @@ export const getContactAndMessages = (id) =>{
 }
 
 export const DeleteMessage = (id) =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages/${id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages/${id}`,
             {   
                 method: "DELETE",
                 headers: {
@@ -23,7 +23,7 @@ export const DeleteMessage = (id) =>{
 }
 
 export const AddMessage = (message) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages`,
             {   
                 method: "POST",
                 headers: {
@@ -35,7 +35,7 @@ export const AddMessage = (message) => {
         )
 }
 export const EditMessage = (message, id) => {
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages/${id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages/${id}`,
             {   
                 method: "PUT",
                 headers: {
@@ -48,7 +48,7 @@ export const EditMessage = (message, id) => {
 }
 
 export const getTags = () =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/tags`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/tags`,
             {
                 headers: {
                     "Authorization": `Token ${localStorage.getItem("sns_token")}`,
@@ -60,7 +60,7 @@ export const getTags = () =>{
 }
 
 export const filterByTag = (object) =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages?tag_selected=${object.tagId}&contact_id=${object.contact_id}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages?tag_selected=${object.tagId}&contact_id=${object.contact_id}`,
             {
                 
                 headers: {
@@ -72,7 +72,7 @@ export const filterByTag = (object) =>{
 
 }
 export const filterBySearchTerm = (string, contactId) =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages?message_body_search=${string}&contact_id=${contactId}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages?message_body_search=${string}&contact_id=${contactId}`,
             {
                 
                 headers: {
@@ -84,7 +84,7 @@ export const filterBySearchTerm = (string, contactId) =>{
 
 }
 export const filterByDate = (string, contactId) =>{
-    return fetch(`https://sns-server-capstone.herokuapp.com/messages?date_selected=${string}&contact_id=${contactId}`,
+    return fetch(` https://sns-server-capstone.herokuapp.com/messages?date_selected=${string}&contact_id=${contactId}`,
             {
                 
                 headers: {
