@@ -147,7 +147,7 @@ export const ContactMessage = () =>{
             messages?.map((message)=>{
                 return (
                         <div key={`message-${message.id}-container`}className="message-box">
-                            <Paper elevation={5}>
+                            <Paper elevation={1} className="contact-paper">
                             <h4 key={`message-${message.id}-body`}>{message.message}</h4>
                             <div className="tag-container">
                                 {message.tags?.length > 0 ?
@@ -175,7 +175,7 @@ export const ContactMessage = () =>{
                             </Paper>
                         </div>
                 )
-            }): "You have no saved messages yet"}
+            }): `You have no saved messages under ${contact?.name} yet!`}
         </div>
         <Button variant="contained"id="create-button" onClick={()=> history.push(`/new/message/${contact.id}`)}>Create Message</Button>
         

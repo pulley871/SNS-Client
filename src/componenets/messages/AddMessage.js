@@ -1,4 +1,4 @@
-import { List, ListItemText, Paper, TextField, ListItemButton, ListItemIcon, Divider, Button } from "@mui/material"
+import { List, ListItemText, Paper, TextField, ListItemButton, ListItemIcon, Divider, Button, Alert, AlertTitle } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { AddMessage, getContactAndMessages, getTags } from "./MessageProvider"
@@ -19,6 +19,7 @@ export const AddMessagePage = () => {
     const [refresh, setRefresh] = useState(false)
     const [activeStep, setActiveStep] = useState(0)
     const steps = ["Message Boy and Date", "Message Tags", "Review"]
+    const [alert, setAlert] = useState(Boolean)
     useEffect(()=>{
         getContactAndMessages(contactId).then((data)=>setContact(data))
         getTags().then((data) => setTags(data))
@@ -51,6 +52,13 @@ export const AddMessagePage = () => {
         }else if (value === "Back"){
             const num = activeStep - 1
             setActiveStep(num)
+        }
+    }
+    const messageIsFilled = () =>{
+        if (messageBody === "" && date === ""){
+            return false
+        }else{
+            return true
         }
     }
     return(
@@ -188,95 +196,30 @@ export const AddMessagePage = () => {
             }} value="Back" variant="outlined">
               Back
             </Button>:""}
+            {alert ? <Alert severity="error"><AlertTitle>Message Needs Some Work</AlertTitle>Please fill out the <strong>Message Body</strong> and <strong>Message Date</strong></Alert> : ""}
             <Button onClick={(event)=>{
-                if (activeStep === steps.length -1){
-                    const message = {
-                        contact_id : contactId,
-                        message : messageBody,
-                        date : date,
-                        tags : chosenTags 
+                let check = messageIsFilled()
+                if (check){
+                    setAlert(false)
+                    if (activeStep === steps.length -1){
+                        const message = {
+                            contact_id : contactId,
+                            message : messageBody,
+                            date : date,
+                            tags : chosenTags 
+                        }
+                        AddMessage(message).then(()=> history.push(`/contacts/${contactId}`))
+                    }else{
+                    stepperFunc(event.target.value)
                     }
-                    AddMessage(message).then(()=> history.push(`/contacts/${contactId}`))
+
                 }else{
-                stepperFunc(event.target.value)
+                    setAlert(true)
                 }
             }} value={activeStep === steps.length - 1 ? 'Finish' : 'Next'} variant={activeStep === steps.length - 1 ? 'contained' : 'outlined'}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
         </Box>
-        {/* <section id="add-message-form">
-            <h1>Message for {contact.name}</h1>
-            <fieldset>
-                <TextField 
-                    id="outlined-textarea"
-                    label="Message Body"
-                    placeholder= "Enter your Message here"
-                    multiline
-                    rows={8}
-                    inputRef={messageBody}
-                />
-            </fieldset>
-            <fieldset>
-                <label htmlFor='name'>Date</label>
-                <input id="add-message-date"type="date" ref={date} name="date" />
-            </fieldset>
-            <List id='cat-list'>
-                <ListItemButton onClick={()=>{
-                    setTog(!catToggle)
-                }}>
-                    <ListItemIcon>
-                        <span class="material-icons">category</span>
-                    </ListItemIcon>
-                    <ListItemText primary="Categories"/>
-                </ListItemButton>
-                <Divider />
-                {catToggle ? 
-                    tags.map((tag)=>{
-                        return( 
-                            <ListItemButton 
-                            key={`tag-${tag.id}`}
-                            value = {tag.id}
-                            onClick={(event)=>{
-                                
-                                setSelected(tag.id)
-
-                            }}
-                            >
-                                {chosenTags.includes(parseInt(tag.id))? 
-                                <ListItemIcon key={`selected-${tag.id}`}>
-                                <span key={`selected-${tag.id}-icon`}class="material-icons">check_box</span>
-                                </ListItemIcon>
-                                :
-                                <ListItemIcon key={`unselected-${tag.id}`}>
-                                <span key={`selected-${tag.id}-icon`}class="material-icons">check_box_outline_blank</span>
-                                </ListItemIcon>
-                                }
-                                <ListItemText key={`tag-text-${tag.id}`}primary={tag.label}/>
-                            </ListItemButton>
-                        )
-                    })
-                
-                :""}
-                
-            </List> */}
-            {/* <Button id="add-message-button"variant="contained" color="success" onClick={()=>{
-                const message = {
-                    contact_id : contactId,
-                    message : messageBody.current.value,
-                    date : date.current.value,
-                    tags : chosenTags 
-                }
-                AddMessage(message).then(()=> history.push(`/contacts/${contactId}`))
-            }}>Submit!</Button> */}
-        {/* </section>
-        <div id="tags-add-message-container">
-            <label htmlFor="selectedTags">Selected Tags</label><br/>
-            <Paper elevation={8} name="selectedTags">
-                {tags.map((tag)=>{
-                    return(chosenTags.includes(tag.id)? <p>{tag.label}</p>:"")
-                    })
-                }
-            </Paper>
-        </div> */}
+        
     </div>)
 }

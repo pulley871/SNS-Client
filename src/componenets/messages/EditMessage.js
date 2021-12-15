@@ -1,4 +1,4 @@
-import { List, ListItemText, Paper, TextField, ListItemButton, ListItemIcon, Divider, Button } from "@mui/material"
+import { List, ListItemText, Paper, TextField, ListItemButton, ListItemIcon, Divider, Button, AlertTitle, Alert } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { EditMessage, getContactAndMessages, getTags } from "./MessageProvider"
@@ -19,7 +19,7 @@ export const EditMessagePage = () => {
     const [selected,setSelected] = useState(0)
     const history = useHistory()
     const [refresh, setRefresh] = useState(false)
-    
+    const [alert, setAlert] = useState(Boolean)
     useEffect(()=>{
         getContactAndMessages(contactId).then((data)=>setContact(data))
         getTags().then((data) => setTags(data))
@@ -62,6 +62,13 @@ export const EditMessagePage = () => {
             setRefresh(!refresh)
         }
     },[selected])
+    const messageIsFilled = () =>{
+        if (messageBody === "" || date === ""){
+            return false
+        }else{
+            return true
+        }
+    }
     return(
     <div id="add-message-container">
         <section id="add-message-form">
@@ -120,24 +127,25 @@ export const EditMessagePage = () => {
                 :""}
                 
             </List>
+            {alert ? <Alert severity="error"><AlertTitle>Message Needs Some Work</AlertTitle>Please fill out the <strong>Message Body</strong> and <strong>Message Date</strong></Alert> : ""}
             <Button id="add-message-button"variant="contained" color="success" onClick={()=>{
-                const message = {
-                    contact_id : contactId,
-                    message : messageBody,
-                    date : date,
-                    tags : chosenTags 
+                const check = messageIsFilled()
+                if (check){
+                    setAlert(false)
+                    const message = {
+                        contact_id : contactId,
+                        message : messageBody,
+                        date : date,
+                        tags : chosenTags 
+                    }
+                    EditMessage(message, messageId).then(()=> history.push(`/contacts/${contactId}`))
+
+                }else{
+                    setAlert(true)
                 }
-                EditMessage(message, messageId).then(()=> history.push(`/contacts/${contactId}`))
             }}>Submit!</Button>
         </section>
-        <div id="tags-add-message-container">
-            <label htmlFor="selectedTags">Selected Tags</label><br/>
-            <Paper elevation={8} name="selectedTags">
-                {tags.map((tag)=>{
-                    return(chosenTags.includes(tag.id)? <p>{tag.label}</p>:"")
-                    })
-                }
-            </Paper>
-        </div>
+        
+        
     </div>)
 }

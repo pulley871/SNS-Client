@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material"
+import { Alert, AlertTitle, Button, TextField } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { NavContext } from "../NavProvider"
@@ -12,6 +12,7 @@ export const EditContactPage = () =>{
     const history = useHistory()
     const {contactId} = useParams()
     const [modal, setModalState] = useState(false)
+    const [alert, setAlert] = useState(Boolean)
     const style = {
         position: 'absolute',
         top: '50%',
@@ -31,6 +32,13 @@ export const EditContactPage = () =>{
         GetContact(contactId).then((data)=> setName(data.name))
         console.log(contactId)
     },[contactId])
+    const contactCheck = () =>{
+        if (name === ""){
+            return false
+        }else{
+            return true
+        }
+    }
     return(<div>
             <Modal open={modal}
             onClose={handleModal} 
@@ -57,11 +65,18 @@ export const EditContactPage = () =>{
                     
                     <TextField label="Contact Name"variant="outlined" onChange={(event)=>setName(event.target.value)}value={name} type="text" name="firstName" className="form-control" placeholder="Contact Name" required autoFocus />
             </fieldset>
+            {alert ? <Alert severity="error"><AlertTitle>You Cant leave the contact blank</AlertTitle>Please fill out the <strong>Contact's Name</strong></Alert> : ""}
             <Button id="add-contact-button"variant="contained" color="success" onClick={()=>{
-                const contact = {
-                    name: name
+                const check = contactCheck()
+                if (check){
+                    setAlert(false)
+                    const contact = {
+                        name: name
+                    }
+                    EditContact(contact, contactId).then(()=> render()).then(()=> history.push(`/contacts/${contactId}`))
+                }else{
+                    setAlert(true)
                 }
-                EditContact(contact, contactId).then(()=> render()).then(()=> history.push(`/contacts/${contactId}`))
                 
             }}>Save</Button>
             <Button id="delete-contact-button"variant="contained" color="error"
