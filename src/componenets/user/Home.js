@@ -21,8 +21,8 @@ export const HomePage = () => {
     return (<>
             <div class="home-container"> 
             <div class="column-quote">
-            {homeData.length > 0?
-            homeData?.map((message)=>{
+            {homeData.message?.length > 0?
+            homeData?.message?.map((message)=>{
                 return(<>
                     <div className={slideNumber === homeData.indexOf(message)+1 ? "mySlidesActive":"mySlidesNotActive"}>
                         <q class="quote" >{message.message}</q>
@@ -41,6 +41,13 @@ export const HomePage = () => {
             
             </div>
             </div>
+            <h1>Welcome Back</h1>
+            <h3><u>Total Contacts</u></h3>
+            <h4>{homeData.total_contacts}</h4>
+            <h3><u>Total Messages</u></h3>
+            <h4>{homeData.total_message}</h4>
+            <h3><u>Avg Messages Per Contact</u></h3>
+            <h4>{(homeData.total_message / homeData.total_contacts).toFixed(1)}</h4>
     
     </>)
 }

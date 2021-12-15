@@ -1,143 +1,137 @@
-.home-container{
+.home-container {
   width: 100%;
 }
 .column-quote {
-    width: 90%;
+  width: 90%;
+  height: 475px;
+  padding: 40px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-bottom: 100px;
+  margin-left: -2em;
+  margin-bottom: 1rem;
+  border-top: 20px solid rgb(78, 78, 221);
+  border-bottom: 20px solid rgb(78, 78, 221);
+  min-width: 40em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mySlidesNotActive {
+  display: none;
+  padding: 80px;
+  text-align: center;
+}
+.mySlidesActive {
+  display: block;
+  padding: 80px;
+  text-align: center;
+}
+.quote {
+  font-size: 80px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+}
+.dot-container {
+  text-align: center;
+  padding: 20px;
+  background: #ddd;
+  margin-left: -4rem;
+  min-width: 100%;
+}
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Add a background color to the active dot/circle */
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+/* Add an italic font style to all quotes */
+q {
+  font-style: italic;
+}
+@media screen and (max-width: 1700px) {
+  .column-quote {
+    width: 80%;
     height: 475px;
     padding: 40px;
-    padding-left:70px;
+    padding-left: 50px;
+    margin-left: 1rem;
     padding-right: 70px;
-    padding-bottom:100px;
-    margin-left: -2em;
+    padding-bottom: 100px;
+    margin-right: 1em;
     margin-bottom: 1rem;
     border-top: 20px solid rgb(78, 78, 221);
-    border-bottom: 20px solid rgb(78, 78, 221);;
-    min-width:  40em;
+    border-bottom: 20px solid rgb(78, 78, 221);
+
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .mySlidesNotActive {
-    display:none;
+  .mySlidesActive {
+    display: block;
     padding: 80px;
     text-align: center;
-  }
-  .mySlidesActive{
-    display:block;
-    padding: 80px;
-    text-align: center;
-    
   }
   .quote {
-    font-size:80px;
-    font-weight:bold;
+    font-size: 60px;
+    font-weight: bold;
     line-height: 1;
     text-align: center;
+  }
+  .dot-container {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1166px) {
+  .column-quote {
+    width: 1rem;
+    height: 475px;
+    padding: 40px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 100px;
+    margin-left: -2em;
+    margin-bottom: 1rem;
+    border-top: 20px solid rgb(78, 78, 221);
+    border-bottom: 20px solid rgb(78, 78, 221);
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mySlidesActive {
+    display: block;
+    padding: 40px;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 80%;
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .quote {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    max-width: 80%;
+    block-size: fit-content;
+    overflow-wrap: break-word;
   }
   .dot-container {
     text-align: center;
     padding: 20px;
     background: #ddd;
-    margin-left: -1rem;
+    margin-left: -2rem;
     min-width: 100%;
-    
+  }
 }
-  .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-  
-  /* Add a background color to the active dot/circle */
-  .active, .dot:hover {
-    background-color: #717171;
-  }
-  
-  /* Add an italic font style to all quotes */
-  q {font-style: italic;}
-  @media screen and (max-width: 1700px) {
-
-    .column-quote{
-      
-        width: 80%;
-        height: 475px;
-        padding: 40px;
-        padding-left:50px;
-        margin-left: 1rem;
-        padding-right: 70px;
-        padding-bottom:100px;
-        margin-right: 1em;
-        margin-bottom: 1rem;
-        border-top: 20px solid rgb(78, 78, 221);
-        border-bottom: 20px solid rgb(78, 78, 221);;
-        
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      
-    }
-    .mySlidesActive{
-      display:block;
-      padding: 80px;
-      text-align: center;
-      
-    }
-    .quote {
-      font-size:60px;
-      font-weight:bold;
-      line-height: 1;
-      text-align: center;
-    }
-  }
-  @media screen and (max-width: 1166px) {
-
-    .column-quote{
-      
-        width: 1rem;
-        height: 475px;
-        padding: 40px;
-        padding-left:70px;
-        padding-right: 70px;
-        padding-bottom:100px;
-        margin-left: -2em;
-        margin-bottom: 1rem;
-        border-top: 20px solid rgb(78, 78, 221);
-        border-bottom: 20px solid rgb(78, 78, 221);;
-        
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      
-    }
-    .mySlidesActive{
-      display:block;
-      padding: 40px;
-      text-align: center;
-      text-overflow: ellipsis;
-      width: 80%;
-      margin-left: 0;
-      display: flex;
-      flex-wrap: wrap;
-      
-    }
-    .quote {
-      font-size:40px;
-      font-weight:bold;
-      line-height: 1;
-      text-align: center;
-      max-width: 80%;
-      block-size: fit-content;
-      overflow-wrap: break-word;
-      
-    }
-    .dot-container {
-      text-align: center;
-      padding: 20px;
-      background: #ddd;
-      margin-left: -2rem;
-      min-width: 100%;
-      
-  }
-  }
